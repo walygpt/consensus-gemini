@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Decision Package",
+  "type": "object",
+  "required": ["title", "headline", "summary", "options", "recommended_plan", "scenarios", "stakeholder_messages", "metrics"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the decision package"
+    },
+    "headline": {
+      "type": "string",
+      "description": "A concise headline summarizing the decision"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Executive summary of the decision package"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description", "pros", "cons", "estimated_cost", "estimated_time_weeks", "success_probability"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "pros": { "type": "array", "items": { "type": "string" } },
+          "cons": { "type": "array", "items": { "type": "string" } },
+          "estimated_cost": { "type": "string" },
+          "estimated_time_weeks": { "type": "number" },
+          "success_probability": { "type": "number", "minimum": 0, "maximum": 100 }
+        }
+      }
+    },
+    "recommended_plan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step_number", "action", "owner", "estimated_time_days"],
+        "properties": {
+          "step_number": { "type": "number" },
+          "action": { "type": "string" },
+          "owner": { "type": "string" },
+          "estimated_time_days": { "type": "number" }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "object",
+      "required": ["best", "expected", "worst"],
+      "properties": {
+        "best": { "type": "string" },
+        "expected": { "type": "string" },
+        "worst": { "type": "string" }
+      }
+    },
+    "stakeholder_messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stakeholder", "channel", "tone", "message"],
+        "properties": {
+          "stakeholder": { "type": "string" },
+          "channel": { "type": "string" },
+          "tone": { "type": "string", "enum": ["formal", "neutral", "persuasive"] },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["metric_name", "target", "measure_frequency"],
+        "properties": {
+          "metric_name": { "type": "string" },
+          "target": { "type": "string" },
+          "measure_frequency": { "type": "string" }
+        }
+      }
+    },
+    "processing_notes": {
+      "type": ["string", "null"],
+      "description": "Any notes about the processing"
+    }
+  }
+}
